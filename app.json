@@ -1,0 +1,98 @@
+{
+    "id": "com.qubino",
+    "name": {
+				"en": "qubino"
+			},
+    "version": "1.0.0",
+    "compatibility": ">=0.9.0",
+    "description": {
+					"en": "Qubino devices for Homey"
+					},
+    "category": [ "appliances", "lights", "climate" ],
+    "images": {
+				"large": "/assets/images/large.png",
+				"small": "/assets/images/small.png"
+			  },
+    "author":	{
+        "name": "Martin Brasse",
+        "email": "kasteleman@gmail.com"
+				},
+    "drivers": [
+	    {
+		    "id": "ZMNHVD1",
+		    "name": {
+						"en": "Qubino Flush Dimmer 0-10V"
+					},
+		    "zwave": {
+						"manufacturerId": 47,
+						"productTypeId": 1,
+						"productId": 53,
+						"learnmode": {
+										"image": "/drivers/ZMNHVD1/assets/learnmode.svg",
+										"instruction": {
+															"en": "Press the button on your Qubino Flush Dimmer three times",
+															"nl": "Druk driemaal op de knop op de Qubino Flush Dimmer"
+														}
+									},
+						"associationGroups": [ 6 ]
+					},
+		    "class": "light",
+		    "capabilities": [ "onoff", "dim" ],
+		    "images": {
+						"large": "/drivers/ZMNHVD1/assets/images/large.png",
+						"small": "/drivers/ZMNHVD1/assets/images/small.png"
+						},
+				"settings": [
+			    {
+				    "id": "Input_1_type",
+				    "type": "dropdown",
+            "values": [
+                        {
+                            "id": "0",
+                            "label": {
+                                "en": "mono-stable switch type (push button) button quick press turns between previous set dimmer value and zero)"
+                            }
+                        },
+                        {
+                            "id": "1",
+                            "label": {
+                                "en": "Bi-stable switch type"
+                            }
+                        },
+                        {
+                            "id": "2",
+                            "label": {
+                                "en": "Potentiometer (Flush Dimmer 0-10V is using set value the last received from potentiometer or from z-wave controller)"
+                            }
+                        },
+                        {
+                            "id": "3",
+                            "label": {
+                                "en": "0-10V Temperature sensor (regulated output)"
+                            }
+                        },
+                        {
+                            "id": "4",
+                            "label": {
+                                "en": "0-10V Illumination sensor (regulated output)"
+                            }
+                        },
+                        {
+                            "id": "5",
+                            "label": {
+                                "en": "0-10V General propose sensor (regulated output)"
+                            }
+                        }
+                    ],
+                    "value": "0",
+                    "label": {
+                      "en": "Input 1 type"
+                    },
+                    "hint": {
+                      "en": "By this parameter the user can set input based on device type (switch, potentiometer, 0-10V sensor). NOTE: After parameter change to value 3,4 or 5 first exclude module (without setting parameters to default value)then wait at least 30s and then re include the module!"
+				    }
+			    }
+			]
+	    }
+		]
+	}
