@@ -24,7 +24,7 @@
 						"en": "Qubino Flush Dimmer 0-10V"
 					},
 		    "zwave": {
-						"manufacturerId": 47,
+						"manufacturerId": 159,
 						"productTypeId": 1,
 						"productId": 53,
 						"learnmode": {
