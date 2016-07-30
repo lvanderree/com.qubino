@@ -21,20 +21,20 @@
 	    {
 		    "id": "ZMNHVD1",
 		    "name": {
-						"en": "Qubino Flush Dimmer 0-10V"
+						"en": "ZMNHVD1 Flush Dimmer 0-10V"
 					},
 		    "zwave": {
-						"manufacturerId": 159,
+						"manufacturerId": 345,
 						"productTypeId": 1,
 						"productId": 53,
 						"learnmode": {
 										"image": "/drivers/ZMNHVD1/assets/learnmode.svg",
 										"instruction": {
-															"en": "Press the button on your Qubino Flush Dimmer three times",
-															"nl": "Druk driemaal op de knop op de Qubino Flush Dimmer"
+                      "en": "Press the service button (back of device) on your Qubino Flush Dimmer more than 2 seconds",
+                      "nl": "Houd de service knop (achterkant van de dimmer) van je Dimmer langer dan 2 seconden ingedrukt"
 														}
 									},
-						"associationGroups": [ 6 ]
+						"associationGroups": [ 1 ]
 					},
 		    "class": "light",
 		    "capabilities": [ "onoff", "dim" ],
@@ -93,6 +93,58 @@
 				    }
 			    }
 			]
-	    }
+    },
+    {
+      "id": "ZMNHDA2",
+      "name": {
+          "en": "ZMNHDA2 Flush Dimmer"
+        },
+      "zwave": {
+          "manufacturerId": 345,
+          "productTypeId": 1,
+          "productId": 1,
+          "learnmode": {
+                  "image": "/drivers/ZMNHDA2/assets/learnmode.svg",
+                  "instruction": {
+                            "en": "Press the service button (back of device) on your Qubino Flush Dimmer more than 2 seconds",
+                            "nl": "Houd de service knop (achterkant van de dimmer) van je Dimmer langer dan 2 seconden ingedrukt"
+                          }
+                },
+          "associationGroups": [ 1 ]
+        },
+      "class": "light",
+      "capabilities": [ "onoff", "dim" ],
+      "images": {
+          "large": "/drivers/ZMNHDA2/assets/images/large.png",
+          "small": "/drivers/ZMNHDA2/assets/images/small.png"
+          },
+      "settings": [
+        {
+          "id": "Input_1_type",
+          "type": "dropdown",
+          "values": [
+                      {
+                          "id": "0",
+                          "label": {
+                              "en": "mono-stable switch type (push button) button quick press turns between previous set dimmer value and zero)"
+                          }
+                      },
+                      {
+                          "id": "1",
+                          "label": {
+                              "en": "Bi-stable switch type"
+                          }
+                      }
+                  ],
+                  "value": "0",
+                  "label": {
+                    "en": "Input 1 type"
+                  },
+                  "hint": {
+                    "en": "By this parameter the user can set input based on device type (switch, Mono-stable switch type (push button)"
+          }
+        }
+    ]
+    }
 		]
 	}

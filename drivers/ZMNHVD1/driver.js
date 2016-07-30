@@ -4,6 +4,7 @@ const path			= require('path');
 const ZwaveDriver	= require('homey-zwavedriver');
 
 module.exports = new ZwaveDriver( path.basename(__dirname), {
+	debug: true,
 	capabilities: {
 
 		'onoff': {
@@ -15,14 +16,13 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 					'Value': value
 				}
 			},
-			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
-			'command_report_parser'		: function( report ){
-				if( typeof report['Value'] === 'string' ) {
+		'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
+		'command_report_parser'		: function( report ){
+			if( typeof report['Value'] === 'string' ) {
 					return report['Value'] === 'on/enable';
 				} else {
 					return report['Value (Raw)'][0] > 0;
 				}
-
 			}
 		},
 
@@ -42,8 +42,9 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				} else {
 					return report['Value (Raw)'][0] / 100;
 				}
-			}
+			},
 		},
+
 		settings: {
 			"Input_1_type": {
 			//By this parameter the user can set input based on device type (switch, potentiometer, 0-10V sensor)
@@ -61,7 +62,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			"index": 1,
 			"size": 1,
 			"parser": function( input ) {
-				return new Buffer([ ( input === true ) ? 0 : 1 ]);
+						return new Buffer([ parseInt(input) ]);
 				}
 			}
 		}
