@@ -4,7 +4,7 @@ const path			= require('path');
 const ZwaveDriver	= require('homey-zwavedriver');
 
 module.exports = new ZwaveDriver( path.basename(__dirname), {
-	debug: true,
+		debug: true,
 	capabilities: {
 
 		'onoff': {
@@ -23,7 +23,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				} else {
 					return report['Value (Raw)'][0] > 0;
 				}
-			}
+			},
 		},
 
 		'dim': {
@@ -44,7 +44,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				}
 			},
 		},
-
+	},
 		settings: {
 			"Input_1_type": {
 			//By this parameter the user can set input based on device type (switch, potentiometer, 0-10V sensor)
