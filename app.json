@@ -30,8 +30,8 @@
 						"learnmode": {
 										"image": "/drivers/ZMNHVD1/assets/learnmode.svg",
 										"instruction": {
-                      "en": "Press the service button (back of device) on your Qubino Flush Dimmer more than 2 seconds",
-                      "nl": "Houd de service knop (achterkant van de dimmer) van je Dimmer langer dan 2 seconden ingedrukt"
+                      "en": "Press the service button on your Qubino Flush Dimmer more than 2 seconds",
+                      "nl": "Houd de service knop van je Dimmer langer dan 2 seconden ingedrukt"
 														}
 									},
 						"associationGroups": [ 1 ]
@@ -50,7 +50,7 @@
                         {
                             "id": "0",
                             "label": {
-                                "en": "mono-stable switch type (push button) button quick press turns between previous set dimmer value and zero)"
+                                "en": "mono-stable switch type button quick press turns between previous set dimmer value and zero"
                             }
                         },
                         {
@@ -62,7 +62,7 @@
                         {
                             "id": "2",
                             "label": {
-                                "en": "Potentiometer (Flush Dimmer 0-10V is using set value the last received from potentiometer or from z-wave controller)"
+                                "en": "Potentiometer"
                             }
                         },
                         {
@@ -89,7 +89,7 @@
                       "en": "Input 1 type"
                     },
                     "hint": {
-                      "en": "By this parameter the user can set input based on device type (switch, potentiometer, 0-10V sensor). NOTE: After parameter change to value 3,4 or 5 first exclude module (without setting parameters to default value)then wait at least 30s and then re include the module!"
+                      "en": "By this parameter the user can set input based on device type. NOTE: After parameter change to value 3,4 or 5 first exclude module then wait at least 30s and then re include the module!"
 				    }
 			    }
 			]
@@ -106,11 +106,11 @@
           "learnmode": {
                   "image": "/drivers/ZMNHDA2/assets/learnmode.svg",
                   "instruction": {
-                            "en": "Press the service button (back of device) on your Qubino Flush Dimmer more than 2 seconds",
-                            "nl": "Houd de service knop (achterkant van de dimmer) van je Dimmer langer dan 2 seconden ingedrukt"
+                            "en": "Press the service button on your Qubino Flush Dimmer more than 2 seconds",
+                            "nl": "Houd de service knop van je Dimmer langer dan 2 seconden ingedrukt"
                           }
                 },
-          "associationGroups": [ 1 ]
+          "associationGroups": [ 4 ]
         },
       "class": "light",
       "capabilities": [ "onoff", "dim" ],
@@ -126,7 +126,7 @@
                       {
                           "id": "0",
                           "label": {
-                              "en": "mono-stable switch type (push button) button quick press turns between previous set dimmer value and zero)"
+                              "en": "mono-stable switch type button quick press turns between previous set dimmer value and zero)"
                           }
                       },
                       {
@@ -141,7 +141,7 @@
                     "en": "Input 1 type"
                   },
                   "hint": {
-                    "en": "By this parameter the user can set input based on device type (switch, Mono-stable switch type (push button)"
+                    "en": "By this parameter the user can set input based on device type"
           }
         }
     ]
