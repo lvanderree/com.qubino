@@ -286,10 +286,10 @@
         "label": {
         "en": "Dimming time when key pressed"
           },
-        "value": 1,
+        "value": 3,
         "attr": {
                 "min": 1,
-                "max": 98
+                "max": 255
               },
         "hint": {
                   "en": "Time of moving the Dimmer between min. and max dimming values by continues hold of push button I1. 1- 255 = 1 second – 255 seconds"
