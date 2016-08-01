@@ -8,22 +8,18 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 	capabilities: {
 
 		'onoff': {
-			'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
-			'command_get'				: 'SWITCH_MULTILEVEL_GET',
-			'command_set'				: 'SWITCH_MULTILEVEL_SET',
+			'command_class'				: 'COMMAND_CLASS_BASIC',
+			'command_get'				: 'BASIC_GET',
+			'command_set'				: 'BASIC_SET',
 			'command_set_parser'		: function( value ){
 				return {
-					'Value': value
+					'Value': value,
 				}
 			},
-		'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
+		'command_report'			: 'BASIC_REPORT',
 		'command_report_parser'		: function( report ){
-			if( typeof report['Value'] === 'string' ) {
-					return report['Value'] === 'on/enable';
-				} else {
-					return report['Value (Raw)'][0] > 0;
-				}
-			},
+				return report['Value'] === 'on/enable';
+			}
 		},
 
 		'dim': {
@@ -42,8 +38,8 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				} else {
 					return report['Value (Raw)'][0] / 100;
 				}
-			},
-		},
+			}
+		}
 	},
 		settings: {
 			"Input_1_type": {

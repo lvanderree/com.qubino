@@ -26,7 +26,7 @@
 		    "zwave": {
 						"manufacturerId": 345,
 						"productTypeId": 1,
-						"productId": 53,
+						"productId": 83,
 						"learnmode": {
 										"image": "",
 										"instruction": {
