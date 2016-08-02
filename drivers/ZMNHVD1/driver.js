@@ -44,25 +44,41 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 	},
 		settings: {
 			"Input_1_type": {
-			//By this parameter the user can set input based on device type (switch, potentiometer, 0-10V sensor)
-			//Available configuration parameters (data type is 1 Byte DEC):
-			//default value 0
-			//0 - mono-stable switch type (push button) – button quick press turns between previous set dimmer value and zero)
-			//1 - Bi-stable switch type
-			//2 - Potentiometer (Flush Dimmer 0-10V is using set value the last received from potentiometer or from z-wave controller)
-			//3 - 0-10V Temperature sensor (regulated output)
-			//4 - 0-10V Illumination sensor (regulated output)
-			//5 - 0-10V General propose sensor (regulated output)
-			//NOTE: After parameter change to value 3,4 or 5 first exclude module (without setting parameters to default value)
-			//then wait at least 30s and then re include the module!
-
 			"index": 1,
 			"size": 1,
 			"parser": function( input ) {
 						return new Buffer([ parseInt(input) ]);
 				}
+		},
+		"Maximum_dimming_value": {
+		"index": 61,
+		"size": 1,
+		"parser": function( input ) {
+			return new Buffer([ parseInt(input) ]);
 			}
+		},
+		"Minimum_dimming_value": {
+		"index": 60,
+		"size": 1,
+		"parser": function( input ) {
+			return new Buffer([ parseInt(input) ]);
+			}
+		},
+		"Dimming_time_(soft_on/off)": {
+		"index": 65,
+		"size": 1,
+		"parser": function( input ) {
+			return new Buffer([ parseInt(input) ] * 100);
+			}
+		},
+		"Dimming_time_when_key_pressed": {
+		"index": 66,
+		"size": 1,
+		"parser": function( input ) {
+			return new Buffer([ parseInt(input)]);
+		 }
 		}
+	}
 })
 
 module.exports.on('initNode', function( token ){

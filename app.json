@@ -90,10 +90,71 @@
                     },
                     "hint": {
                       "en": "By this parameter the user can set input based on device type. NOTE: After parameter change to value 3,4 or 5 first exclude module then wait at least 30s and then re include the module!"
-				    }
-			    }
+				            }
+          },
+          {
+           "id": "Maximum_dimming_value",
+            "type": "number",
+            "label": {
+                      "en": "Maximum_dimming_value"
+                      },
+            "value": 99,
+            "attr": {
+                     "min": 2,
+                     "max": 99
+                    },
+            "hint": {
+                    "en": "The parameter defines the maximum dimming value. NOTE: The maximum level may not be lower than the minimum level!"
+                    }
+            },
+            {
+             "id": "Minimum_dimming_value",
+             "type": "number",
+             "label": {
+                       "en": "Minimum_dimming_value"
+                      },
+             "value": 1,
+             "attr": {
+                      "min": 1,
+                      "max": 98
+                     },
+             "hint": {
+                      "en": "The parameter defines the minimum dimming value. NOTE: The maximum level may not be lower than the minimum level!"
+                     }
+            },
+            {
+             "id": "Dimming_time_(soft_on/off)",
+             "type": "number",
+             "label": {
+                       "en": "Dimming time (soft on/off)"
+                      },
+             "value": 100,
+             "attr": {
+                      "min": 1,
+                      "max": 255
+                     },
+             "hint": {
+                      "en": "Set value means time of moving the Dimmer between min. and max. dimming values by short press of push button I1 or controlled through UI. Default value is 100 (Dimming time between min. and max. dimming values is 1s). 1 - 255 = 10 mseconds – 2550 mseconds (2,55s), step is 10 mseconds"
+                     }
+            },
+            {
+             "id": "Dimming_time_when_key_pressed",
+             "type": "number",
+             "label": {
+                        "en": "Dimming time when key pressed"
+                      },
+             "value": 3,
+             "attr": {
+                      "min": 1,
+                       "max": 255
+                     },
+             "hint": {
+                       "en": "Time of moving the Dimmer between min. and max dimming values by continues hold of push button I1. 1- 255 = 1 second – 255 seconds"
+                     }
+           }
 			]
     },
+
     {
       "id": "ZMNHDA2",
       "name": {
