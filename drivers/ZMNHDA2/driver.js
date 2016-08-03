@@ -51,23 +51,19 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_class'				: 'COMMAND_CLASS_METER',
 			'command_get'				: 'METER_GET',
 			'command_get_parser': function() {
+				console.log('report');
 				return {
-						'Sensor Type': 'Single-E electric meter',
+						'Sensor Type': 'Electric meter',
 						'Properties1': {
-														'Scale': 2,
-														'Precision': 1,
-														'Size': 4
+														'Scale': 1,
+													//	'Precision': 1,
+													//	'Size': 4
 													},
-						'Properties2': {
-														'Scale': 2,
-														'Precision': 1,
-														'Size': 4
-													},
-						'Value': 'Meter Value (Parsed)'
 								}
 			},
 			'command_report'			: 'METER_REPORT',
 			'command_report_parser'		: function( report ) {
+				console.log('report');
 				return report['Meter Value (Parsed)'];
 				},
 			}
@@ -158,10 +154,10 @@ module.exports.on('initNode', function( token ){
 
     var node = module.exports.nodes[ token ];
     if( node ) {
-        node.instance.CommandClass['COMMAND_CLASS_METER'].on('value', function( command, report ){
+        node.instance.CommandClass['COMMAND_CLASS_METER'].on('report', function( command, report ){
             console.log(command);
             console.log('COMMAND NAME LOG: ' + JSON.stringify(command.name, null, 4));
-            console.log(value);
+            console.log(report);
             console.log('REPORT LOG: ' + JSON.stringify(report, null, 4));
         });
     }
