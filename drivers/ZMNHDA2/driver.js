@@ -24,7 +24,6 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				} else {
 					return report['Value (Raw)'][0] > 0;
 				}
-
 			}
 		},
 
@@ -48,24 +47,31 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			}
 		},
 
-		'meter_power': {
+		'measure_power': {
 			'command_class'				: 'COMMAND_CLASS_METER',
 			'command_get'				: 'METER_GET',
-			'command_get_parser'		: function(){
+			'command_get_parser': function() {
 				return {
-					'Properties2': {
-						'Scale': 2,
-						'Precision': 1,
-						'Size': 4
-					}
-				}
+						'Sensor Type': 'Single-E electric meter',
+						'Properties1': {
+														'Scale': 2,
+														'Precision': 1,
+														'Size': 4
+													},
+						'Properties2': {
+														'Scale': 2,
+														'Precision': 1,
+														'Size': 4
+													},
+						'Value': 'Meter Value (Parsed)'
+								}
 			},
 			'command_report'			: 'METER_REPORT',
 			'command_report_parser'		: function( report ) {
 				return report['Meter Value (Parsed)'];
+				},
 			}
-		}
-	},
+		},
 
 		settings: {
 			"Input_1_type": {
@@ -152,10 +158,10 @@ module.exports.on('initNode', function( token ){
 
     var node = module.exports.nodes[ token ];
     if( node ) {
-        node.instance.CommandClass['COMMAND_CLASS_SWITCH_BINARY'].on('report', function( command, report ){
+        node.instance.CommandClass['COMMAND_CLASS_METER'].on('value', function( command, report ){
             console.log(command);
             console.log('COMMAND NAME LOG: ' + JSON.stringify(command.name, null, 4));
-            console.log(report);
+            console.log(value);
             console.log('REPORT LOG: ' + JSON.stringify(report, null, 4));
         });
     }
