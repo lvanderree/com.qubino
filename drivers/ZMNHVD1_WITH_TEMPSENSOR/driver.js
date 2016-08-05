@@ -46,6 +46,26 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				}
 			}
 		},
+
+		'measure_temperature': {
+			'command_class'				: 'COMMAND_CLASS_SENSOR_MULTILEVEL',
+			'command_get'				: 'SENSOR_MULTILEVEL_GET',
+			'command_get_parser': function() {
+				console.log('report');
+				return {
+						'Properties1': {
+														'Scale': 1
+													//	'Precision': 1
+													//	'Size': 2
+													},
+								}
+			},
+			'command_report'			: 'SENSOR_MULTILEVEL_REPORT',
+			'command_report_parser'		: function( report ){
+				console.log('report');
+				return report['Sensor Value (Parsed)'] / 10;
+				}
+			},
 	},
 		settings: {
 			"Input_1_type": {

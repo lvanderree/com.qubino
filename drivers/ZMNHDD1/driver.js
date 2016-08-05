@@ -57,26 +57,6 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			}
 		},
 
-		'measure_temperature': {
-			'command_class'				: 'COMMAND_CLASS_SENSOR_MULTILEVEL',
-			'command_get'				: 'SENSOR_MULTILEVEL_GET',
-			'command_get_parser': function() {
-				console.log('report');
-				return {
-						'Properties1': {
-														'Scale': 1
-													//	'Precision': 1
-													//	'Size': 2
-													},
-								}
-			},
-			'command_report'			: 'SENSOR_MULTILEVEL_REPORT',
-			'command_report_parser'		: function( report ){
-				console.log('report');
-				return report['Sensor Value (Parsed)'] / 10;
-			}
-		},
-
 		'measure_power': {
 			'command_class'				: 'COMMAND_CLASS_METER',
 			'command_get'				: 'METER_GET',
@@ -107,15 +87,22 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				return new Buffer([ parseInt(input) ]);
 				}
 			},
+			"Input_2_type": {
+			"index": 1,
+			"size": 1,
+			"parser": function( input ) {
+				return new Buffer([ parseInt(input) ]);
+				}
+			},
 			"Input_2_contact_type": {
-			"index": 2,
+			"index": 3,
 			"size": 1,
 			"parser": function( input ) {
 				return new Buffer([ parseInt(input) ]);
 				}
 			},
 			"Input_3_contact_type": {
-			"index": 3,
+			"index": 4,
 			"size": 1,
 			"parser": function( input ) {
 				return new Buffer([ parseInt(input) ]);
