@@ -19,11 +19,8 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			},
 			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
-				if( typeof report['Value'] === 'string' ) {
-					return report['Value'] === 'on/enable';
-				} else {
-					return report['Value (Raw)'][0] > 0;
-				}
+				if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
+				if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
 			}
 		},
 

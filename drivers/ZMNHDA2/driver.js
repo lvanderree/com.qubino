@@ -19,11 +19,9 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			},
 			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
-				if( typeof report['Value'] === 'string' ) {
-					return report['Value'] === 'on/enable';
-				} else {
-					return report['Value (Raw)'][0] > 0;
-				}
+				console.log('report');
+					if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
+					if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
 			}
 		},
 
@@ -39,6 +37,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			},
 			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
+				console.log('report');
 				if( typeof report['Value'] === 'string' ) {
 					return ( report['Value'] === 'on/enable' ) ? 1.0 : 0.0;
 				} else {
@@ -63,10 +62,9 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_get_parser': function() {
 				console.log('report');
 				return {
+						'Sensor Type': 'Temperature (version 1)',
 						'Properties1': {
-														'Scale': 1
-													//	'Precision': 1
-													//	'Size': 2
+														'Scale': 0
 													},
 								}
 			},
@@ -184,7 +182,7 @@ module.exports.on('initNode', function( token ){
 
     var node = module.exports.nodes[ token ];
     if( node ) {
-        node.instance.CommandClass['COMMAND_CLASS_METER'].on('report', function( command, report ){
+        node.instance.CommandClass['COMMAND_CLASS_SWITCH_MULTILEVEL'].on('value', function( command, report ){
             console.log(command);
             console.log('COMMAND NAME LOG: ' + JSON.stringify(command.name, null, 4));
             console.log(report);
