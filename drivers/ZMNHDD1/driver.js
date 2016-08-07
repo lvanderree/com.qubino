@@ -8,19 +8,23 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 		capabilities: {
 
 		'onoff': {
-			'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
-			'command_get'				: 'SWITCH_MULTILEVEL_GET',
-			'command_set'				: 'SWITCH_MULTILEVEL_SET',
+			'command_class'				: 'COMMAND_CLASS_SWITCH_BINARY',
+			'command_get'				: 'SWITCH_BINARY_GET',
+			'command_set'				: 'SWITCH_BINARY_SET',
 			'command_set_parser'		: function( value ){
+				console.log(JSON.stringify(value));
 				return {
-					'Value': ( value > 0 ) ? 'on/enable' : 'off/disable',
-					'Dimming Duration': 1
+					'Switch Value': value
 				}
 			},
-			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
+			'command_report'			: 'SWITCH_BINARY_REPORT',
 			'command_report_parser'		: function( report ){
-				if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
-				if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
+				console.log(JSON.stringify(report));
+				if( report['Value'] === 'on/enable' ) {
+								return true;
+							} else {
+								return false;
+							}
 			}
 		},
 

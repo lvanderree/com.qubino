@@ -17,6 +17,7 @@
         "name": "Martin Brasse",
         "email": "kasteleman@gmail.com"
 				},
+
     "drivers": [
 	    {
 		    "id": "ZMNHVD1",
@@ -221,7 +222,7 @@
           "associationGroups": [ 1,4 ]
         },
       "class": "socket",
-      "capabilities": [ "onoff", "dim", "measure_power", "measure_temperature" ],
+      "capabilities": [ "onoff", "dim", "measure_power", "meter_power", "measure_temperature" ],
       "images": {
           "large": "/drivers/ZMNHDA2/assets/images/large.png",
           "small": "/drivers/ZMNHDA2/assets/images/small.png"
