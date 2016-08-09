@@ -4,76 +4,45 @@ const path			= require('path');
 const ZwaveDriver	= require('homey-zwavedriver');
 
 module.exports = new ZwaveDriver( path.basename(__dirname), {
-	 debug: true,
+	 debug: false,
 		capabilities: {
 
-		'onoff': {
-			'command_class'				: 'COMMAND_CLASS_SWITCH_BINARY',
-			'command_get'				: 'SWITCH_BINARY_GET',
-			'command_set'				: 'SWITCH_BINARY_SET',
-			'command_set_parser'		: function( value ){
-				console.log(JSON.stringify(value));
-				return {
-					'Switch Value': value
+			'onoff': {
+				'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
+				'command_get'				: 'SWITCH_MULTILEVEL_GET',
+				'command_set'				: 'SWITCH_MULTILEVEL_SET',
+				'command_set_parser'		: function( value ){
+					console.log(JSON.stringify(value));
+					return {
+						'Value': ( value > 0 ) ? 'on/enable' : 'off/disable',
+						'Dimming Duration': 1
+					}
+				},
+				'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
+				'command_report_parser'		: function( report ){
+					console.log(JSON.stringify(report));
+					if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
+					if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
 				}
 			},
-			'command_report'			: 'SWITCH_BINARY_REPORT',
-			'command_report_parser'		: function( report ){
-				console.log(JSON.stringify(report));
-				if( report['Value'] === 'on/enable' ) {
-								return true;
-							} else {
-								return false;
-							}
-			}
-		},
 
-		'dim': {
-			'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
-			'command_get'				: 'SWITCH_MULTILEVEL_GET',
-			'command_set'				: 'SWITCH_MULTILEVEL_SET',
-			'command_set_parser'		: function( value ){
-				console.log(JSON.stringify(value));
-				return {
-					'Value': value * 100,
-					'Dimming Duration': 1
-				}
-			},
-			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
-			'command_report_parser'		: function( report ){
-				console.log(JSON.stringify(report));
-				if( typeof report['Value'] === 'string' ) {
-					return ( report['Value'] === 'on/enable' ) ? 1.0 : 0.0;
-				} else {
+			'dim': {
+				'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
+				'command_get'				: 'SWITCH_MULTILEVEL_GET',
+				'command_set'				: 'SWITCH_MULTILEVEL_SET',
+				'command_set_parser'		: function( value ){
+					console.log(JSON.stringify(value));
+					return {
+						'Value': value * 100,
+						'Dimming Duration': 1
+					}
+				},
+				'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
+				'command_report_parser'		: function( report ){
+					console.log(JSON.stringify(report));
 					return report['Value (Raw)'][0] / 100;
 				}
-			}
-		},
-
-		'meter_power': {
-			'command_class'				: 'COMMAND_CLASS_METER',
-			'command_get'				: 'METER_GET',
-			//'command_get_parser': function() {
-			command_get_parser: () => {
-				return {
-						'Sensor Type': 'Energy meter',
-						'Properties1': {
-														'Meter Type': 3,
-														'Scale': 1,
-													//	'Precision': 1,
-													//	'Size': 4
-												},
-								}
 			},
-			'command_report'			: 'METER_REPORT',
-			//'command_report_parser'		: function( report ) {
-			command_report_parser: report => {
-				console.log(JSON.stringify(report));
-				//if (report['Sensor Type'] === 'Energy meter') return report['Sensor Value (Parsed)'];
-				//return null;
-				return report['Meter Value (Parsed)'][2];
-			},
-		},
 
 		'measure_temperature': {
 			'command_class'				: 'COMMAND_CLASS_SENSOR_MULTILEVEL',
@@ -97,7 +66,6 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_class'				: 'COMMAND_CLASS_METER',
 			'command_get'				: 'METER_GET',
 			command_get_parser: () => {
-			//'command_get_parser': function() {
 				return {
 						'Sensor Type': 'Electric meter',
 						'Properties1': {
@@ -110,10 +78,9 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			},
 			'command_report'			: 'METER_REPORT',
 			command_report_parser: report => {
-			//command_report_parser		: function( report ) {
 				console.log(JSON.stringify(report));
 				return report['Meter Value (Parsed)'];
-				},
+				}
 			}
 		},
 

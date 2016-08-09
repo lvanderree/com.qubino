@@ -7,24 +7,22 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 	debug: true,
 	capabilities: {
 
-		'onoff': {
-			'command_class'				: 'COMMAND_CLASS_SWITCH_BINARY',
-			'command_get'				: 'SWITCH_BINARY_GET',
-			'command_set'				: 'SWITCH_BINARY_SET',
+	'onoff': {
+			'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
+			'command_get'				: 'SWITCH_MULTILEVEL_GET',
+			'command_set'				: 'SWITCH_MULTILEVEL_SET',
 			'command_set_parser'		: function( value ){
 				console.log(JSON.stringify(value));
 				return {
-					'Switch Value': value
+					'Value': ( value > 0 ) ? 'on/enable' : 'off/disable',
+					'Dimming Duration': 1
 				}
 			},
-			'command_report'			: 'SWITCH_BINARY_REPORT',
+			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
 				console.log(JSON.stringify(report));
-				if( report['Value'] === 'on/enable' ) {
-								return true;
-							} else {
-								return false;
-							}
+					if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
+					if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
 			}
 		},
 
@@ -33,21 +31,20 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_get'				: 'SWITCH_MULTILEVEL_GET',
 			'command_set'				: 'SWITCH_MULTILEVEL_SET',
 			'command_set_parser'		: function( value ){
+				console.log(JSON.stringify(value));
 				return {
-					'Value': value,
-					'Dimming Duration': 1
+					'Value': value * 100,
+					'Dimming Duration': 10
 				}
 			},
 			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
-				if( typeof report['Value'] === 'string' ) {
-					return ( report['Value'] === 'on/enable' ) ? 1.0 : 0.0;
-				} else {
-					return report['Value (Raw)'][0] / 100;
-				}
+				console.log(JSON.stringify(report));
+				return report['Value (Raw)'][0] / 100;
 			}
-		},
+		}
 	},
+
 		settings: {
 			"Input_1_type": {
 			"index": 1,
