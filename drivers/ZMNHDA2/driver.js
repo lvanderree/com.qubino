@@ -51,9 +51,9 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				return {
 						'Sensor Type': 'Temperature (version 1)',
 						'Properties1': {
-														'Scale': 0,
-													},
-								}
+								'Scale': 0,
+						},
+				}
 			},
 			'command_report'			: 'SENSOR_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
@@ -69,12 +69,12 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				return {
 						'Sensor Type': 'Electric meter',
 						'Properties1': {
-														'Meter Type': 3,
-														'Scale': 1,
-													//	'Precision': 1,
-													//	'Size': 4
-													}
-								}
+							'Meter Type': 3,
+							'Scale': 1,
+							//	'Precision': 1,
+							//	'Size': 4
+						}
+				}
 			},
 			'command_report'			: 'METER_REPORT',
 			command_report_parser: report => {
