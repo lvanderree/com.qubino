@@ -73,7 +73,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 														'Scale': 1,
 													//	'Precision': 1,
 													//	'Size': 4
-													},
+													}
 								}
 			},
 			'command_report'			: 'METER_REPORT',

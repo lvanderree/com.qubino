@@ -1,7 +1,7 @@
 {
   "name": "com.qubino",
   "version": "1.0.0",
-  "description": "This app adds support for Qubino devices in Homey. At this moment only the Qubino Flush Dimmer 0-10V ZMNHVD1 is included",
+  "description": "This app adds support for Qubino devices in Homey.",
   "main": "app.js",
   "dependencies": {
     "homey-zwavedriver": "git+https://github.com/athombv/node-homey-zwavedriver.git",
@@ -13,9 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/athombv/com.qubino.git"
+    "url": "git+https://github.com/kasteleman/com.qubino.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/athombv/com.qubino#readme"
+  "homepage": "https://github.com/kasteleman/com.qubino.git"
 }

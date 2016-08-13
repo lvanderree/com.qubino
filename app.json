@@ -29,7 +29,7 @@
 						"productTypeId": 1,
 						"productId": 83,
 						"learnmode": {
-										"image": "",
+										"image": "/drivers/ZMNHVD1/assets/learnmode.svg",
 										"instruction": {
                       "en": "Press the service button on your Qubino Flush Dimmer more than 2 seconds",
                       "nl": "Houd de service knop van je Dimmer langer dan 2 seconden ingedrukt voor toevoegen en langer dan 6 seconden voor verwijderen"

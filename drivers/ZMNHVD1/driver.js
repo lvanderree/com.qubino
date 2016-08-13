@@ -4,10 +4,10 @@ const path			= require('path');
 const ZwaveDriver	= require('homey-zwavedriver');
 
 module.exports = new ZwaveDriver( path.basename(__dirname), {
-	debug: true,
+	debug: false,
 	capabilities: {
 
-	'onoff': {
+		'onoff': {
 			'command_class'				: 'COMMAND_CLASS_SWITCH_MULTILEVEL',
 			'command_get'				: 'SWITCH_MULTILEVEL_GET',
 			'command_set'				: 'SWITCH_MULTILEVEL_SET',
@@ -44,7 +44,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			}
 		}
 	},
-
+	
 		settings: {
 			"Input_1_type": {
 			"index": 1,
