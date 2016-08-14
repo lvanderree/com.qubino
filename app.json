@@ -3,7 +3,7 @@
     "name": {
 				"en": "Qubino"
 			},
-    "version": "1.0.0",
+    "version": "1.0.1",
     "compatibility": ">=0.9.0",
     "description": {
 					"en": "Qubino devices for Homey"
