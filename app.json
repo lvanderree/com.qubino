@@ -3,7 +3,7 @@
     "name": {
 				"en": "Qubino"
 			},
-    "version": "1.0.1",
+    "version": "1.0.2",
     "compatibility": ">=0.9.0",
     "description": {
 					"en": "Qubino devices for Homey"
@@ -421,7 +421,7 @@
       "zwave": {
           "manufacturerId": 345,
           "productTypeId": 1,
-          "productId": 51,
+          "productId": 81,
           "learnmode": {
                   "image": "/drivers/ZMNHDD1/assets/learnmode.svg",
                   "instruction": {
