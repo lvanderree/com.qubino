@@ -3,7 +3,7 @@
     "name": {
 				"en": "Qubino"
 			},
-    "version": "1.0.3",
+    "version": "1.0.4",
     "compatibility": ">=0.9.0",
     "description": {
 					"en": "Qubino devices for Homey"
@@ -546,6 +546,192 @@
                     "en": "The parameter defines the contact type"
           }
         },
+        {
+        "id": "State_of_device_after_power_failure",
+        "type": "checkbox",
+        "label": {
+        "en": "State of device after power failure"
+          },
+        "value": false,
+        "hint": {
+          "en": "The parameter defines if the state of the device should be either saved or not in case of a power failure"
+          }
+        },
+        {
+        "id": "Power_report_on_power_change",
+        "type": "number",
+        "label": {
+        "en": "Power report on power change"
+          },
+        "value": 5,
+        "attr": {
+                "min": 0,
+                "max": 100
+              },
+        "hint": {
+                  "en": "The parameter defines if a power report should be sent depending on the predefined power change in percent"
+                }
+        },
+        {
+        "id": "Power_report_by_time_interval",
+        "type": "number",
+        "label": {
+        "en": "Power report by time nterval"
+          },
+        "value": 300,
+        "attr": {
+                "min": 0,
+                "max": 65535
+              },
+        "hint": {
+                  "en": "A power report is sent based on the predefined time interval in seconds. 0 -> Function is disabled. Valuerange: 1 – 65535."
+                }
+        },
+        {
+        "id": "Maximum_dimming_value",
+        "type": "number",
+        "label": {
+        "en": "Maximum_dimming_value"
+          },
+        "value": 99,
+        "attr": {
+                "min": 2,
+                "max": 99
+              },
+        "hint": {
+                  "en": "The parameter defines the maximum dimming value. NOTE: The maximum level may not be lower than the minimum level!"
+                }
+        },
+        {
+        "id": "Minimum_dimming_value",
+        "type": "number",
+        "label": {
+        "en": "Minimum_dimming_value"
+          },
+        "value": 1,
+        "attr": {
+                "min": 1,
+                "max": 98
+              },
+        "hint": {
+                  "en": "The parameter defines the minimum dimming value. NOTE: The maximum level may not be lower than the minimum level!"
+                }
+        },
+        {
+        "id": "Dimming_time_(soft_on/off)",
+        "type": "number",
+        "label": {
+        "en": "Dimming time (soft on/off)"
+          },
+        "value": 100,
+        "attr": {
+                "min": 1,
+                "max": 255
+              },
+        "hint": {
+                  "en": "Set value means time of moving the Dimmer between min. and max. dimming values by short press of push button I1 or controlled through UI. Default value is 100 (Dimming time between min. and max. dimming values is 1s). 1 - 255 = 10 mseconds – 2550 mseconds (2,55s), step is 10 mseconds"
+                }
+        },
+        {
+        "id": "Dimming_time_when_key_pressed",
+        "type": "number",
+        "label": {
+        "en": "Dimming time when key pressed"
+          },
+        "value": 3,
+        "attr": {
+                "min": 1,
+                "max": 255
+              },
+        "hint": {
+                  "en": "Time of moving the Dimmer between min. and max dimming values by continues hold of push button I1. 1- 255 = 1 second – 255 seconds"
+                }
+        }
+    ]
+    },
+
+    {
+      "id": "ZMNHSD1",
+      "name": {
+          "en": "ZMNHSD1 DIN Rail Dimmer"
+        },
+      "zwave": {
+          "manufacturerId": 345,
+          "productTypeId": 1,
+          "productId": 82,
+          "learnmode": {
+                  "image": "/drivers/ZMNHSD1/assets/learnmode.svg",
+                  "instruction": {
+                            "en": "For INCLUSION: press service button S your Dimmer for more than 2 seconds or press push button I1 three times within 3 seconds (3 times change switch state within 3 seconds). For EXCLUSION: press push button I1 five times within 3 seconds ( 5 times change switch state within 3 seconds) or if service button S is pressed more than 2 and less than 6 seconds.",
+                            "nl": "Voor TOEVOEGEN: houd de service knop S van je Dimmer langer dan 2 seconden ingedrukt of druk knop I1 3x binnen 3 seconden (verander de status van de knop 3x binnen 3 seconden). Voor VERWIJDEREN: druk knop I1 5x binnen 3 seconden (verander de status van de knop 5x binnen 3 seconden) of houd service button S meer dan 2 maar korter dan 6 seconden ingedrukt."
+                          }
+                },
+          "associationGroups": [ 1,4 ]
+        },
+      "class": "socket",
+      "capabilities": [ "onoff", "dim", "measure_power" ],
+      "images": {
+          "large": "/drivers/ZMNHSD1/assets/images/large.png",
+          "small": "/drivers/ZMNHSD1/assets/images/small.png"
+          },
+      "settings": [
+        {
+          "id": "Input_1_type",
+          "type": "dropdown",
+          "values": [
+                      {
+                          "id": "0",
+                          "value": "0",
+                          "label": {
+                              "en": "mono-stable switch type"
+                          }
+                      },
+                      {
+                          "id": "1",
+                          "value": "1",
+                          "label": {
+                              "en": "Bi-stable switch type"
+                          }
+                      }
+                  ],
+                  "value": "0",
+                  "label": {
+                    "en": "Input 1 switch type"
+                  },
+                  "hint": {
+                    "en": "By this parameter the user can set input based on device type"
+          }
+        },
+        {
+         "id": "Automatic_turning_off_output_after_set_time",
+          "type": "number",
+          "label": {
+                    "en": "Automatic turning off output after set time"
+                    },
+          "value": 0,
+          "attr": {
+                   "min": 0,
+                   "max": 325369
+                  },
+          "hint": {
+                  "en": "0 - Auto OFF disabled. 1 - 32535 = 1 second - 32535 seconds Auto OFF enabled with define time, step is 1 second"
+                  }
+          },
+          {
+           "id": "Automatic_turning_on_output_after_set_time",
+            "type": "number",
+            "label": {
+                      "en": "Automatic turning on output after set time"
+                      },
+            "value": 0,
+            "attr": {
+                     "min": 0,
+                     "max": 32536
+                    },
+            "hint": {
+                    "en": "0 - Auto ON disabled. 1 - 32535 = 1 second - 32535 seconds Auto ON enabled with define time, step is 1 second"
+                    }
+            },
         {
         "id": "State_of_device_after_power_failure",
         "type": "checkbox",
