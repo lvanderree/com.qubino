@@ -102,6 +102,20 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				return new Buffer([ parseInt(input) ]);
 				}
 			},
+			"Automatic_turning_off_output_after_set_time": {
+			"index": 11,
+			"size": 2,
+			"parser": function( input ) {
+				return new Buffer([ parseInt(input) ]);
+				}
+			},
+			"Automatic_turning_on_output_after_set_time": {
+			"index": 12,
+			"size": 2,
+			"parser": function( input ) {
+				return new Buffer([ parseInt(input) ]);
+				}
+			},
 			"State_of_device_after_power_failure": {
 			"index": 30,
 			"size": 1,

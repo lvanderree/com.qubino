@@ -546,6 +546,36 @@
                     "en": "The parameter defines the contact type"
           }
         },
+      {
+      "id": "Automatic_turning_off_output_after_set_time",
+      "type": "number",
+      "label": {
+                "en": "Automatic turning off output after set time"
+                },
+      "value": 0,
+      "attr": {
+              "min": 0,
+              "max": 325369
+              },
+      "hint": {
+              "en": "0 - Auto OFF disabled. 1 - 32535 = 1 second - 32535 seconds Auto OFF enabled with define time, step is 1 second"
+             }
+      },
+      {
+      "id": "Automatic_turning_on_output_after_set_time",
+        "type": "number",
+        "label": {
+                  "en": "Automatic turning on output after set time"
+                  },
+        "value": 0,
+        "attr": {
+                "min": 0,
+                "max": 32536
+                },
+        "hint": {
+                "en": "0 - Auto ON disabled. 1 - 32535 = 1 second - 32535 seconds Auto ON enabled with define time, step is 1 second"
+                }
+        },
         {
         "id": "State_of_device_after_power_failure",
         "type": "checkbox",
