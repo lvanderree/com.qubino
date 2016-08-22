@@ -51,7 +51,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				return {
 						'Sensor Type': 'Electric meter',
 						'Level': {
-							'Meter Type': 3,
+							'Meter Type': 4,
 							'Scale': 1
 							//	'Precision': 1,
 							//	'Size': 4

@@ -339,7 +339,7 @@
         "id": "Power_report_by_time_interval",
         "type": "number",
         "label": {
-        "en": "Power report by time nterval"
+        "en": "Power report by time Interval"
           },
         "value": 300,
         "attr": {
@@ -606,7 +606,7 @@
         "id": "Power_report_by_time_interval",
         "type": "number",
         "label": {
-        "en": "Power report by time nterval"
+        "en": "Power report by time Interval"
           },
         "value": 300,
         "attr": {
@@ -792,7 +792,7 @@
         "id": "Power_report_by_time_interval",
         "type": "number",
         "label": {
-        "en": "Power report by time nterval"
+        "en": "Power report by time Interval"
           },
         "value": 300,
         "attr": {
