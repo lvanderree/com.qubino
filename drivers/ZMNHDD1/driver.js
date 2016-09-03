@@ -44,27 +44,40 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				}
 			},
 
-		'measure_power': {
-			'command_class'				: 'COMMAND_CLASS_METER',
-			'command_get'				: 'METER_GET',
-			command_get_parser: () => {
-				return {
-						'Sensor Type': 'Electric meter',
-						'Level': {
-							'Meter Type': 3,
-							'Scale': 1
-							//	'Precision': 1,
-							//	'Size': 4
-				}
+			'measure_power': {
+				'command_class'				: 'COMMAND_CLASS_METER',
+				'command_get'				: 'METER_GET',
+				command_get_parser: () => {
+					return {
+							'Properties1': {
+								'Scale': 7
+							}
+					}
+				},
+				'command_report'			: 'METER_REPORT',
+				command_report_parser: report => {
+					console.log(JSON.stringify(report));
+					return report['Meter Value (Parsed)'];
+					}
+				},
+
+			'meter_power': {
+				'command_class'				: 'COMMAND_CLASS_METER',
+				'command_get'				: 'METER_GET',
+				command_get_parser: () => {
+					return {
+							'Properties1': {
+								'Scale': 0
+							}
+					}
+				},
+				'command_report'			: 'METER_REPORT',
+				command_report_parser: report => {
+					console.log(JSON.stringify(report));
+					return report['Meter Value (Parsed)'];
+					}
 				}
 			},
-			'command_report'			: 'METER_REPORT',
-			command_report_parser: report => {
-				console.log(JSON.stringify(report));
-				return report['Meter Value (Parsed)'];
-				}
-			}
-		},
 
 		settings: {
 			"Input_1_type": {

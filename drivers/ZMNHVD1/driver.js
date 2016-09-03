@@ -42,8 +42,26 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				console.log(JSON.stringify(report));
 				return report['Value (Raw)'][0] / 100;
 			}
-		}
-	},
+		},
+
+				'measure_temperature': {
+				'command_class'				: 'COMMAND_CLASS_SENSOR_MULTILEVEL',
+				'command_get'				: 'SENSOR_MULTILEVEL_GET',
+				'command_get_parser': function() {
+					return {
+						'Sensor Type': 'Temperature (version 1)',
+						'Properties1': {
+								'Scale': 0,
+							},
+						}
+					},
+					'command_report'			: 'SENSOR_MULTILEVEL_REPORT',
+					'command_report_parser'		: function( report ){
+						console.log(JSON.stringify(report));
+						return report['Sensor Value (Parsed)'];
+					}
+			}
+		},
 
 		settings: {
 			"Input_1_type": {
@@ -101,6 +119,20 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 		"parser": function( input ) {
 			return new Buffer([ parseInt(input)]);
 		 }
+	 	},
+		"Temperature_sensor_offset": {
+		"index": 110,
+		"size": 2,
+		"parser": function( input ) {
+			return new Buffer([ parseInt(input)]);
+		 }
+		},
+		"Digital_temperature_sensor_reporting": {
+		"index": 120,
+		"size": 2,
+		"parser": function( input ) {
+			return new Buffer([ parseInt(input)]);
+		 }
 		}
 	}
 })
@@ -116,4 +148,8 @@ module.exports.on('initNode', function( token ){
             console.log('REPORT LOG: ' + JSON.stringify(report, null, 4));
         });
     }
+})
+
+module.exports.on('applicationUpdate', function( device_data, buf ){
+	Homey.manager('flow').triggerDevice( 'ZMNHVD1_temp_changed', null, null, device_data )
 })

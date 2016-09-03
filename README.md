@@ -9,4 +9,9 @@ This app adds support following Qubino devices in Homey:
 
 Not all settings are implemented. Feel free to contribute!
 Temperature sensor only working for ZMNHDA2.
-Powermeasurement if working, only in Watt.
+
+Version 1.04
+
+* Powermeasurement in kWh and Watt added
+* Moved to mobile devicecards. Be aware, not al values are visible because at this moment there is no scrollbar.
+* ZMNHDA2 Flush Dimmer: If no temperaturesensor connected, -999,90 °C is shown as value.

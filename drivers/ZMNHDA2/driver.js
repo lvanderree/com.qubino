@@ -4,7 +4,7 @@ const path			= require('path');
 const ZwaveDriver	= require('homey-zwavedriver');
 
 module.exports = new ZwaveDriver( path.basename(__dirname), {
-	 debug: false,
+	 debug: true,
 		capabilities: {
 
 			'onoff': {
@@ -58,7 +58,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_report'			: 'SENSOR_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
 				console.log(JSON.stringify(report));
-				return report['Sensor Value (Parsed)'] / 10;
+				return report['Sensor Value (Parsed)'];
 			}
 		},
 
@@ -67,12 +67,25 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_get'				: 'METER_GET',
 			command_get_parser: () => {
 				return {
-						'Sensor Type': 'Electric meter',
 						'Properties1': {
-							'Meter Type': 3,
-							'Scale': 1,
-							//	'Precision': 1,
-							//	'Size': 4
+							'Scale': 7
+						}
+				}
+			},
+			'command_report'			: 'METER_REPORT',
+			command_report_parser: report => {
+				console.log(JSON.stringify(report));
+				return report['Meter Value (Parsed)'];
+				}
+			},
+
+		'meter_power': {
+			'command_class'				: 'COMMAND_CLASS_METER',
+			'command_get'				: 'METER_GET',
+			command_get_parser: () => {
+				return {
+						'Properties1': {
+							'Scale': 0
 						}
 				}
 			},
@@ -163,4 +176,8 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			 }
 			}
 		}
+})
+
+module.exports.on('applicationUpdate', function( device_data, buf ){
+	Homey.manager('flow').triggerDevice( 'ZMNHDA2_temp_changed', null, null, device_data )
 })
