@@ -12,7 +12,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_get'				: 'SWITCH_MULTILEVEL_GET',
 			'command_set'				: 'SWITCH_MULTILEVEL_SET',
 			'command_set_parser'		: function( value ){
-				console.log(JSON.stringify(value));
+				//console.log(JSON.stringify(value));
 				return {
 					'Value': ( value > 0 ) ? 'on/enable' : 'off/disable',
 					'Dimming Duration': 1
@@ -20,7 +20,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			},
 			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
-				console.log(JSON.stringify(report));
+				//console.log(JSON.stringify(report));
 					if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
 					if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
 			}
@@ -31,7 +31,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			'command_get'				: 'SWITCH_MULTILEVEL_GET',
 			'command_set'				: 'SWITCH_MULTILEVEL_SET',
 			'command_set_parser'		: function( value ){
-				console.log(JSON.stringify(value));
+				//console.log(JSON.stringify(value));
 				return {
 					'Value': value * 100,
 					'Dimming Duration': 10
@@ -39,7 +39,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 			},
 			'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 			'command_report_parser'		: function( report ){
-				console.log(JSON.stringify(report));
+				//console.log(JSON.stringify(report));
 				return report['Value (Raw)'][0] / 100;
 			}
 		},
@@ -57,7 +57,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 					},
 					'command_report'			: 'SENSOR_MULTILEVEL_REPORT',
 					'command_report_parser'		: function( report ){
-						console.log(JSON.stringify(report));
+						//console.log(JSON.stringify(report));
 						return report['Sensor Value (Parsed)'];
 					}
 			}
@@ -135,7 +135,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 		 }
 		}
 	}
-})
+});
 
 module.exports.on('initNode', function( token ){
 
@@ -148,8 +148,28 @@ module.exports.on('initNode', function( token ){
             console.log('REPORT LOG: ' + JSON.stringify(report, null, 4));
         });
     }
-})
+});
 
-module.exports.on('applicationUpdate', function( device_data, buf ){
-	Homey.manager('flow').triggerDevice( 'ZMNHVD1_temp_changed', null, null, device_data )
-})
+// bind Flow
+module.exports.on('initNode', function( token ){
+
+	var node = module.exports.nodes[ token ];
+	if( node ) {
+		node.instance.CommandClass['COMMAND_CLASS_SENSOR_MULTILEVEL'].on('report', function( command, report ){
+			if( command.name === 'SENSOR_MULTILEVEL_REPORT' ) {
+				console.log('Flow: New report value came in');
+				console.log(node.device_data);
+				console.log(report['Sensor Value (Parsed)']);
+				var trigger = 'ZMNHVD1_temp_changed';
+				var state = report['Sensor Value (Parsed)'];
+				var tokens = {'ZMNHVD1_temp': report['Sensor Value (Parsed)']};
+				Homey.manager('flow').triggerDevice(trigger, tokens, state, node.device_data);
+			}
+		});
+	}
+});
+
+Homey.manager('flow').on('trigger.ZMNHVD1_temp_changed', function( callback, args, state ) {
+		callback(null, true);
+		return;
+});

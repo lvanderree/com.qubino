@@ -12,7 +12,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				'command_get'				: 'SWITCH_MULTILEVEL_GET',
 				'command_set'				: 'SWITCH_MULTILEVEL_SET',
 				'command_set_parser'		: function( value ){
-					console.log(JSON.stringify(value));
+					//console.log(JSON.stringify(value));
 					return {
 						'Value': ( value > 0 ) ? 'on/enable' : 'off/disable',
 						'Dimming Duration': 1
@@ -20,7 +20,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				},
 				'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 				'command_report_parser'		: function( report ){
-					console.log(JSON.stringify(report));
+					//console.log(JSON.stringify(report));
 					if (report.hasOwnProperty('Current Value')) return report['Current Value'] !== 0;
 					if (report.hasOwnProperty('Value')) return report['Value'] !== 0;
 				}
@@ -31,7 +31,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				'command_get'				: 'SWITCH_MULTILEVEL_GET',
 				'command_set'				: 'SWITCH_MULTILEVEL_SET',
 				'command_set_parser'		: function( value ){
-					console.log(JSON.stringify(value));
+					//console.log(JSON.stringify(value));
 					return {
 						'Value': value * 100,
 						'Dimming Duration': 1
@@ -39,7 +39,7 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				},
 				'command_report'			: 'SWITCH_MULTILEVEL_REPORT',
 				'command_report_parser'		: function( report ){
-					console.log(JSON.stringify(report));
+					//console.log(JSON.stringify(report));
 					return report['Value (Raw)'][0] / 100;
 				}
 			},
@@ -56,10 +56,14 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				},
 				'command_report'			: 'METER_REPORT',
 				command_report_parser: report => {
-					console.log(JSON.stringify(report));
-					return report['Meter Value (Parsed)'];
+					//console.log(report.Properties2['Scale bits 10']);
+					if(report.Properties2['Scale bits 10'] === 2) {
+						return report['Meter Value (Parsed)'];
+						//console.log(report['Meter Value (Parsed)']);
+					} else return null;
 					}
 				},
+
 
 			'meter_power': {
 				'command_class'				: 'COMMAND_CLASS_METER',
@@ -73,8 +77,11 @@ module.exports = new ZwaveDriver( path.basename(__dirname), {
 				},
 				'command_report'			: 'METER_REPORT',
 				command_report_parser: report => {
-					console.log(JSON.stringify(report));
-					return report['Meter Value (Parsed)'];
+					//console.log(report.Properties2['Scale bits 10']);
+					if(report.Properties2['Scale bits 10'] === 0) {
+						return report['Meter Value (Parsed)'];
+						//console.log(report['Meter Value (Parsed)']);
+					} else return null;
 					}
 				}
 			},

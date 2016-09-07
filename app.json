@@ -28,9 +28,9 @@
   				},
           "tokens": [
             {
-              "name": "Temperature",
-              "title": {
-                "en": "Temp"
+              "name": "ZMNHVD1_temp",
+              "title":  {
+                "en": "temp"
               }
             }
           ],
@@ -43,27 +43,27 @@
   				]
   			},
         {
-          "id": "ZMNHDA2_temp_changed",
-          "title": {
-            "en": "Temperature has changed",
-            "nl": "Temperatuur is veranderd"
-          },
+  				"id": "ZMNHDA2_temp_changed",
+  				"title": {
+  					"en": "Temperature has changed",
+  					"nl": "Temperatuur is veranderd"
+  				},
           "tokens": [
             {
-              "name": "Temperature",
-              "title": {
-                "en": "Temp"
+              "name": "ZMNHDA2_temp",
+              "title":  {
+                "en": "temp"
               }
             }
           ],
-          "args": [
-            {
-              "name": "device",
-              "type": "device",
-              "filter": "driver_id=ZMNHDA2"
-            }
-          ]
-        }
+  				"args": [
+  					{
+  						"name": "device",
+  						"type": "device",
+  						"filter": "driver_id=ZMNHDA2"
+  					}
+  				]
+  			}
   		]
     },
 
