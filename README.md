@@ -6,9 +6,14 @@ This app adds support following Qubino devices in Homey:
 * ZMNHDD1 Flush Dimmer (Z-Wave Plus)
 * ZMNHDA2 Flush Dimmer
 * ZMNHSD1 DIN RAIL Dimmer (untested)
+* ZMNHOD1 Flush shutter DC (untested)
 
 Not all settings are implemented. Feel free to contribute!
 Temperature sensor only working for ZMNHDA2.
+
+Version 1.05
+
+* Added Support for Flush shutter DC 
 
 Version 1.04
 
